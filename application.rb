@@ -19,38 +19,41 @@ end
 
 helpers do
   # add your helpers here
-  def send_pubnub(msg, channelName, timerId)
-  	puts channelName
-  	settings.pubnub.publish(
-  		channel: channelName,
-  		message: msg
-  	) do |e|
-  		puts e.parsed_response
+  def send_pubnub(msg, channelNames, timerId)
+  	channelNames.each do |name|
+  		puts "sending to channel: " + name
+	  	settings.pubnub.publish(
+	  		channel: name,
+	  		message: {:message => {:timerId => timerId}, :type => msg}
+	  	) do |e|
+	  		puts e.parsed_response
+	  	end
   	end
   end
 end
 
-get "/v1/setTimer/:channelId/:numOfSeconds/:timerId" do
+post "/v1/setTimer" do
 
 	seconds = params[:numOfSeconds].to_i
-	channelName = params[:channelId]
-	timerId = params[:timerId].to_i
+	channelNames = params[:channelNames].split(',')
+	timerId = params[:timerId]
 
 	Thread.new {
 		sleep seconds
-		send_pubnub("Timer Done",channelName,timerId)
+		send_pubnub("Timer Done",channelNames,timerId)
 	}
 
 	if seconds > 30
 		Thread.new {
 			sleep seconds - 30
-			send_pubnub("30 Second Warning",channelName, timerId)
+			send_pubnub("30 Second Warning",channelNames, timerId)
 		}
 	end
+
 end
 
 post "/v1/cancelTimer/:timerId" do 
 
-	
+
 
 end
