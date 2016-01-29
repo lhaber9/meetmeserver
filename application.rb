@@ -2,6 +2,7 @@ require "rubygems"
 require "bundler/setup"
 require "sinatra"
 require "pubnub"
+require 'httparty'
 require File.join(File.dirname(__FILE__), "environment")
 
 configure do
@@ -26,7 +27,7 @@ helpers do
 	  		channel: name,
 	  		message: {:message => {:timerId => timerId}, :type => msg}
 	  	) do |e|
-	  		puts e.parsed_response
+	  		# puts e.parsed_response
 	  	end
   	end
   end
@@ -43,17 +44,38 @@ post "/v1/setTimer" do
 		send_pubnub("Timer Done",channelNames,timerId)
 	}
 
-	if seconds > 30
-		Thread.new {
-			sleep seconds - 30
-			send_pubnub("30 Second Warning",channelNames, timerId)
-		}
-	end
+	# if seconds > 30
+	# 	Thread.new {
+	# 		sleep seconds - 30
+	# 		send_pubnub("30 Second Warning",channelNames, timerId)
+	# 	}
+	# end
 
 end
 
+post "/v1/setAvailabilityTimer/:postId" do
+
+	seconds = params[:numOfSeconds].to_i
+	channelNames = params[:channelNames].split(',')
+	timerId = params[:timerId]
+	postId = params[:postId]
+
+	Thread.new {
+		sleep seconds
+
+		headers = {"X-Parse-Application-Id" => "EvhQWhNkOQrt9FOkJaEAe3tX5qJDfq7K8NMMnpd8",
+				   "X-Parse-REST-API-Key" => "GPHw7mJbToX9Tyw7suXilsbkoUoSKN7wpXuTUqJK"}
+
+		response = HTTParty.get("https://api.parse.com/1/classes/Posts/#{postId}", :headers => headers);
+		postStatus = response.parsed_response["status"]
+
+		if postStatus == 'A'
+			puts HTTParty.put("https://api.parse.com/1/classes/Posts/#{postId}", :body => {"status"=>"I"}.to_json, :headers => headers)
+			send_pubnub("Timer Done",channelNames,timerId)
+		end
+	}
+end
+
 post "/v1/cancelTimer/:timerId" do 
-
-
 
 end

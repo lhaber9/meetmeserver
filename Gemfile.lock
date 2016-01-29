@@ -14,9 +14,13 @@ GEM
     eventmachine (1.0.9.1)
     foreman (0.78.0)
       thor (~> 0.19.1)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
     minitest (5.8.3)
+    multi_xml (0.5.5)
     net-http-persistent (2.9.4)
     pubnub (3.7.10)
       eventmachine (~> 1.0)
@@ -58,6 +62,7 @@ DEPENDENCIES
   delayed_job
   dotenv
   foreman
+  httparty
   json (>= 1.8.3)
   pubnub
   rack-test
