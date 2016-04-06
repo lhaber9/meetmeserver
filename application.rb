@@ -63,6 +63,8 @@ post "/v1/setAvailabilityTimer/:postId" do
 	Thread.new {
 		sleep seconds
 
+		puts "HERE"
+
 		headers = {"X-Parse-Application-Id" => "EvhQWhNkOQrt9FOkJaEAe3tX5qJDfq7K8NMMnpd8",
 				   "X-Parse-REST-API-Key" => "GPHw7mJbToX9Tyw7suXilsbkoUoSKN7wpXuTUqJK"}
 
