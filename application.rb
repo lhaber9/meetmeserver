@@ -68,8 +68,8 @@ post "/v1/setAvailabilityTimer/:postId" do
 		# 		   "X-Parse-REST-API-Key" => "GPHw7mJbToX9Tyw7suXilsbkoUoSKN7wpXuTUqJK"}
 
 		#Rise
-		var headers = {	"X-Parse-Application-Id" => "LmB0uFwS57tbG9O4JYXvMhe1dBOF0Xmnagio1EhV",
-						"X-Parse-REST-API-Key" =>  "7CG6T7BjtYnnCrjoKqaSqsbY8s8ge6fYCp9z81hY"}
+		headers = {	"X-Parse-Application-Id" => "LmB0uFwS57tbG9O4JYXvMhe1dBOF0Xmnagio1EhV",
+						"X-Parse-REST-API-Key" => "7CG6T7BjtYnnCrjoKqaSqsbY8s8ge6fYCp9z81hY"}
 
 		response = HTTParty.get("https://api.parse.com/1/classes/Posts/#{postId}", :headers => headers);
 		postStatus = response.parsed_response["status"]
