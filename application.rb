@@ -55,6 +55,8 @@ end
 
 post "/v1/setAvailabilityTimer/:postId" do
 
+	puts "Hello"
+
 	seconds = params[:numOfSeconds].to_i
 	channelNames = params[:channelNames].split(',')
 	timerId = params[:timerId]
