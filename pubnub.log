@@ -2090,3 +2090,23 @@ D, [2016-04-05T13:20:46.778801 #37019] DEBUG -- pubnub: Event#handle_response
 D, [2016-04-05T13:20:46.778915 #37019] DEBUG -- pubnub: Event#add_common_data_to_envelopes
 D, [2016-04-05T13:20:46.778941 #37019] DEBUG -- pubnub: Response: [1,"Sent","14598768468557008"]
 D, [2016-04-05T13:20:46.778960 #37019] DEBUG -- pubnub: Firing callbacks
+D, [2016-04-06T18:49:00.690592 #53225] DEBUG -- pubnub: Symbolizing options keys
+D, [2016-04-06T18:49:00.690898 #53225] DEBUG -- pubnub: Setting default values
+D, [2016-04-06T18:49:00.690980 #53225] DEBUG -- pubnub: 
+
+Created new Pubnub::Client instance
+D, [2016-04-06T18:53:03.028919 #53271] DEBUG -- pubnub: Symbolizing options keys
+D, [2016-04-06T18:53:03.029202 #53271] DEBUG -- pubnub: Setting default values
+D, [2016-04-06T18:53:03.029264 #53271] DEBUG -- pubnub: 
+
+Created new Pubnub::Client instance
+D, [2016-04-06T19:04:34.206893 #53314] DEBUG -- pubnub: Symbolizing options keys
+D, [2016-04-06T19:04:34.207368 #53314] DEBUG -- pubnub: Setting default values
+D, [2016-04-06T19:04:34.207427 #53314] DEBUG -- pubnub: 
+
+Created new Pubnub::Client instance
+D, [2016-04-06T19:08:36.598154 #53320] DEBUG -- pubnub: Symbolizing options keys
+D, [2016-04-06T19:08:36.598320 #53320] DEBUG -- pubnub: Setting default values
+D, [2016-04-06T19:08:36.598385 #53320] DEBUG -- pubnub: 
+
+Created new Pubnub::Client instance

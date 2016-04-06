@@ -55,8 +55,6 @@ end
 
 post "/v1/setAvailabilityTimer/:postId" do
 
-	puts "Hello"
-
 	seconds = params[:numOfSeconds].to_i
 	channelNames = params[:channelNames].split(',')
 	timerId = params[:timerId]
@@ -65,15 +63,16 @@ post "/v1/setAvailabilityTimer/:postId" do
 	Thread.new {
 		sleep seconds
 
-		puts "HERE"
+		# #Orig
+		# headers = {"X-Parse-Application-Id" => "EvhQWhNkOQrt9FOkJaEAe3tX5qJDfq7K8NMMnpd8",
+		# 		   "X-Parse-REST-API-Key" => "GPHw7mJbToX9Tyw7suXilsbkoUoSKN7wpXuTUqJK"}
 
-		headers = {"X-Parse-Application-Id" => "EvhQWhNkOQrt9FOkJaEAe3tX5qJDfq7K8NMMnpd8",
-				   "X-Parse-REST-API-Key" => "GPHw7mJbToX9Tyw7suXilsbkoUoSKN7wpXuTUqJK"}
+		#Rise
+		var headers = {	"X-Parse-Application-Id": "LmB0uFwS57tbG9O4JYXvMhe1dBOF0Xmnagio1EhV",
+						"X-Parse-REST-API-Key": "7CG6T7BjtYnnCrjoKqaSqsbY8s8ge6fYCp9z81hY"}
 
 		response = HTTParty.get("https://api.parse.com/1/classes/Posts/#{postId}", :headers => headers);
 		postStatus = response.parsed_response["status"]
-
-		puts "HERE"
 
 		if postStatus == 'A'
 			puts HTTParty.put("https://api.parse.com/1/classes/Posts/#{postId}", :body => {"status"=>"I"}.to_json, :headers => headers)
