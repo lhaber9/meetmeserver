@@ -69,6 +69,8 @@ post "/v1/setAvailabilityTimer/:postId" do
 		response = HTTParty.get("https://api.parse.com/1/classes/Posts/#{postId}", :headers => headers);
 		postStatus = response.parsed_response["status"]
 
+		puts "HERE"
+
 		if postStatus == 'A'
 			puts HTTParty.put("https://api.parse.com/1/classes/Posts/#{postId}", :body => {"status"=>"I"}.to_json, :headers => headers)
 			send_pubnub("Timer Done",channelNames,timerId)
